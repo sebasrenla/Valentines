@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valentine's Question</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial, sans-serif;
+      margin-top: 100px;
+      position: relative;
+      overflow: hidden;
+    }
+    .container {
+      display: flex;
+      justify-content: center;
+      gap: 50px;
+      margin-top: 20px;
+    }
+    .button-container {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      position: relative;
+    }
+    .arrow {
+      display: none;
+      font-size: 150px;
+      margin-top: -10px;
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Will you be my Valentine?</h1>
+  <div class="container">
+    <div class="button-container">
+      <button id="yesBtn" onclick="yesClick()">Yes</button>
+      <div class="arrow" id="arrow">&#x2B06;</div>
+    </div>
+    <button id="noBtn" onmouseover="moveButton()">No</button>
+  </div>
+
+  <script>
+    let firstAttempt = false;
+    function yesClick() {
+      window.location.href = "love.html";
+    }
+
+    function moveButton() {
+      if (!firstAttempt) {
+        document.getElementById("arrow").style.display = "block";
+        firstAttempt = true;
+      }
+      const noButton = document.getElementById("noBtn");
+      if (noButton.style.position !== "absolute") {
+        noButton.style.position = "absolute";
+      }
+      const buttonWidth = noButton.offsetWidth;
+      const buttonHeight = noButton.offsetHeight;
+      let x = Math.random() * (window.innerWidth - buttonWidth - 100) + 50;
+      let y = Math.random() * (window.innerHeight - buttonHeight - 100) + 50;
+      
+      // Ensure the button stays within the visible screen
+      x = Math.max(50, Math.min(x, window.innerWidth - buttonWidth - 50));
+      y = Math.max(50, Math.min(y, window.innerHeight - buttonHeight - 50));
+      
+      noButton.style.left = x + "px";
+      noButton.style.top = y + "px";
+    }
+  </script>
+</body>
+</html>
